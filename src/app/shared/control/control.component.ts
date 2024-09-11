@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, HostBinding, HostListener, Input, ViewEncapsulation, contentChild, inject } from '@angular/core';
+import { Component, ContentChild, ElementRef, HostBinding, HostListener, Input, ViewEncapsulation, afterNextRender, afterRender, contentChild, inject } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -24,6 +24,18 @@ export class ControlComponent {
   // @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
 
   private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
+
+  constructor() {
+    afterRender(() => {
+      console.log('AFTER RENDER');
+    });
+
+    afterNextRender(() => {
+      console.log('AFTER NEXT RENDER');
+    })
+  }
+
   onClick() {
     console.log('Clicked !!!');
     console.log(this.ele);
