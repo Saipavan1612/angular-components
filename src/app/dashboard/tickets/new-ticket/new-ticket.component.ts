@@ -19,6 +19,10 @@ export class NewTicketComponent implements AfterContentInit, OnInit {
   //@Output() add = new EventEmitter;
   add = output<{ title: string, request: string }>();
 
+
+  enteredTitle: string = '';
+  enteredText: string = '';
+
   constructor() {
 
   }
@@ -33,12 +37,15 @@ export class NewTicketComponent implements AfterContentInit, OnInit {
     console.log(this.form().nativeElement)
   }
 
-  onSubmit(title: string, request: string) {
+  onSubmit() {
     console.log('Submitted');
 
-    console.log(title);
-    console.log(request);
-    this.add.emit({ title: title, request: request })
-    this.form().nativeElement.reset();
+    console.log(this.enteredTitle);
+    console.log(this.enteredText);
+    this.add.emit({ title: this.enteredTitle, request: this.enteredText })
+    //this.form().nativeElement.reset();
+
+    this.enteredTitle = '';
+    this.enteredText = '';
   }
 }
